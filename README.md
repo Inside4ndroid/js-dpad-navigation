@@ -1,5 +1,9 @@
 # D-Pad Navigation Library
 
+[![Build Status](https://github.com/Inside4ndroid/js-dpad-navigation/actions/workflows/build.yml/badge.svg)](https://github.com/Inside4ndroid/js-dpad-navigation/actions/workflows/build.yml)
+[![npm version](https://img.shields.io/npm/v/@inside4ndroid/js-dpad-nav.svg)](https://www.npmjs.com/package/@inside4ndroid/js-dpad-nav)
+[![License](https://img.shields.io/npm/l/@inside4ndroid/js-dpad-nav.svg)](https://github.com/Inside4ndroid/js-dpad-navigation/blob/master/LICENSE)
+
 ![alt text](http://i.imgur.com/1LcHG7j.png "D-Pad Navigation Library Demo Image")
 
 This library makes it quick and easy to support D-Pad Navigation in a web app.
