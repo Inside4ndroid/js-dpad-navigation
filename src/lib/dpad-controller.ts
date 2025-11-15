@@ -54,9 +54,9 @@ export class DpadController {
 
   findFocusableItems() {
     const focusableItems: NodeListOf<HTMLElement> = document.querySelectorAll(FOCUSABLE_ITEM_SELECTOR);
-    for(const fi of focusableItems) {
+    Array.from(focusableItems).forEach(fi => {
       this.addFocusableItem(new FocusableItem(fi));
-    }
+    });
   }
 
   addFocusableItem(i: FocusableItem) {
@@ -259,7 +259,7 @@ export class DpadController {
     return this.horizontalDistance(fromMetrics, toMetrics, toMetrics, fromMetrics);
   }
 
-  private getRightDistance = function(fromMetrics: Metrics, toMetrics: Metrics) {
+  private getRightDistance(fromMetrics: Metrics, toMetrics: Metrics) {
     // Move Right
     return this.horizontalDistance(fromMetrics, toMetrics, fromMetrics, toMetrics);
   }

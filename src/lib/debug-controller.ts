@@ -59,11 +59,11 @@ export class DebugController {
     }
   }
 
-  private clearDisplay = function() {
+  private clearDisplay() {
     const debugLines = document.querySelectorAll(DEBUG_LINE_SELECTOR);
-    for(const dl of debugLines) {
+    Array.from(debugLines).forEach(dl => {
       dl.remove();
-    }
+    });
   }
 
   private printDebugLinesForItem(index: number, focusableItem: FocusableItem) {

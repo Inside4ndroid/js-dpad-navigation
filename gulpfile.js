@@ -1,44 +1,43 @@
-const path = require('path');
+const { rimraf } = require('rimraf');
 const gulp = require('gulp');
-const clean = require('@hopin/wbt-clean'); 
-const tsBrowser = require('@hopin/wbt-ts-browser');
-const tsNode = require('@hopin/wbt-ts-node');
+const { spawn } = require('child_process');
+const path = require('path');
 
-const src = path.join(__dirname, 'src');
 const dst = path.join(__dirname, 'build');
 
-gulp.task('clean', gulp.series(
-  clean.gulpClean([dst]),
-));
+gulp.task('clean', async () => {
+  await rimraf(dst);
+});
 
-gulp.task('build-browser-lib', gulp.series(
-  tsBrowser.gulpBuild('gauntface.dpad', {
-    src: path.join(src, 'lib'),
-    dst: path.join(dst, 'browser'),
-  })
-));
+function runCommand(command, args = []) {
+  return new Promise((resolve, reject) => {
+    const proc = spawn(command, args, { 
+      stdio: 'inherit', 
+      shell: true 
+    });
+    proc.on('close', (code) => {
+      if (code !== 0) {
+        reject(new Error(`Command failed with code ${code}`));
+      } else {
+        resolve();
+      }
+    });
+  });
+}
 
-gulp.task('build-browser-helper', gulp.series(
-  tsBrowser.gulpBuild('gauntface.dpad', {
-    src: path.join(src, 'helper'),
-    dst: path.join(dst, 'helper'),
-    rootDir: src,
-  })
-));
+gulp.task('build-browser', async () => {
+  await runCommand('npx', ['rollup', '-c', 'rollup.config.js']);
+});
 
-gulp.task('build-node-lib', gulp.series(
-  tsNode.gulpBuild({
-    src: path.join(src, 'lib'),
-    dst: path.join(dst, 'node-lib'),
-  })
-));
+gulp.task('build-node-lib', async () => {
+  await runCommand('npx', ['tsc', '-p', 'tsconfig.node.json']);
+});
 
 gulp.task('build',
   gulp.series(
     'clean',
     gulp.parallel(
-      'build-browser-lib',
-      'build-browser-helper',
+      'build-browser',
       'build-node-lib',
     ),
   )

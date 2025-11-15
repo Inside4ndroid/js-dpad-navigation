@@ -31,10 +31,13 @@
   },
   "homepage": "https://github.com/gauntface/dpad-navigation#readme",
   "devDependencies": {
-    "@hopin/wbt-clean": "0.0.126",
-    "@hopin/wbt-ts-browser": "0.0.126",
-    "@hopin/wbt-ts-node": "0.0.126",
-    "gulp": "4.0.2"
+    "@rollup/plugin-typescript": "^11.1.6",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "gulp": "^4.0.2",
+    "rimraf": "^5.0.5",
+    "rollup": "^4.9.6",
+    "tslib": "^2.6.2",
+    "typescript": "^5.3.3"
   },
   "files": [
     "build/",
