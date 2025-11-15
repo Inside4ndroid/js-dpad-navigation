@@ -52,8 +52,8 @@ With the HTML setup, you can use the helper library by adding the following to y
 HTML pages:
 
 ```html
-<script src="https://unpkg.com/@inside4ndroid/dpad-nav@3.0.1/build/helper/helper/dpad.js" async defer></script>
-<script src="https://unpkg.com/@inside4ndroid/dpad-nav@3.0.1/build/helper/helper/dpad-debugger.js" async defer></script>
+<script src="https://unpkg.com/@inside4ndroid/js-dpad-nav@1.0.0/build/helper/helper/dpad.js" async defer></script>
+<script src="https://unpkg.com/@inside4ndroid/js-dpad-nav@1.0.0/build/helper/helper/dpad-debugger.js" async defer></script>
 ```
 
 These scripts will add listeners to apply the dpad library to your pages and the `dpad-debugger.js` will
@@ -68,8 +68,8 @@ a `DpadController` and `DebugController`, which are discussing in the "Library A
 If you want to use the helper files but prefer to self-host the files, you can get them from npm via:
 
 ```shell
-npm install @inside4ndroid/dpad-nav --save-dev
-cp ./node_modules/@inside4ndroid/dpad-nav/build/helper/*.js ./src/third_party/dpad-nav/
+npm install @inside4ndroid/js-dpad-nav --save-dev
+cp ./node_modules/@inside4ndroid/js-dpad-nav/build/helper/*.js ./src/third_party/js-dpad-nav/
 ```
 
 ## Using the library
@@ -81,8 +81,8 @@ If you want to use the library directly and avoid the helpers, you can take one 
 Use a CDN hosted copy of the library:
 
 ```html
-<script src="https://unpkg.com/@inside4ndroid/dpad-nav@3.0.1/build/browser/dpad-controller.js" async defer></script>
-<script src="https://unpkg.com/@inside4ndroid/dpad-nav@3.0.1/build/browser/debug-controller.js" async defer></script>
+<script src="https://unpkg.com/@inside4ndroid/js-dpad-nav@1.0.0/build/browser/dpad-controller.js" async defer></script>
+<script src="https://unpkg.com/@inside4ndroid/js-dpad-nav@1.0.0/build/browser/debug-controller.js" async defer></script>
 ```
 
 The libraries will be accesible via `window.inside4ndroid.dpad.DpadController` and `window.inside4ndroid.dpad.DebugController`;
@@ -93,13 +93,13 @@ If you use NPM to manage your JavaScript dependencies, you can install and use t
 library as an npm module:
 
 ```shell
-npm install @inside4ndroid/dpad-nav --save-dev
+npm install @inside4ndroid/js-dpad-nav --save-dev
 ```
 
 Then include the scripts like so:
 
 ```javascript
-const {DpadController, DebugController} = require('@inside4ndroid/dpad-nav');
+const {DpadController, DebugController} = require('@inside4ndroid/js-dpad-nav');
 ```
 
 ## Library API
