@@ -1,9 +1,9 @@
 {
-  "name": "@gauntface/dpad-nav",
+  "name": "@inside4ndroid/dpad-nav",
   "publishConfig": {
     "access": "public"
   },
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "A JS / TS library to make it easy to add d-pad navigation to a web app.",
   "main": "build/node-lib/index.js",
   "types": "build/node-lib/index.d.ts",
@@ -17,19 +17,19 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/gauntface/dpad-navigation.git"
+    "url": "git+https://github.com/Inside4ndroid/js-dpad-navigation.git"
   },
   "keywords": [
-    "gauntface",
+    "inside4ndroid",
     "dpad",
     "navigation"
   ],
-  "author": "gauntface",
+  "author": "inside4ndroid",
   "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/gauntface/dpad-navigation/issues"
   },
-  "homepage": "https://github.com/gauntface/dpad-navigation#readme",
+  "homepage": "https://github.com/Inside4ndroid/js-dpad-navigation#README.md",
   "devDependencies": {
     "@rollup/plugin-typescript": "^11.1.6",
     "@rollup/plugin-node-resolve": "^15.2.3",

@@ -9,7 +9,7 @@ module.exports = [
     output: {
       file: path.join(__dirname, 'build/browser/index.js'),
       format: 'iife',
-      name: 'gauntface.dpad',
+      name: 'inside4ndroid.dpad',
       sourcemap: true
     },
     plugins: [
@@ -28,7 +28,7 @@ module.exports = [
     output: {
       file: path.join(__dirname, 'build/helper/dpad.js'),
       format: 'iife',
-      name: 'gauntface.dpad',
+      name: 'inside4ndroid.dpad',
       sourcemap: true
     },
     plugins: [
@@ -46,7 +46,7 @@ module.exports = [
     output: {
       file: path.join(__dirname, 'build/helper/dpad-debugger.js'),
       format: 'iife',
-      name: 'gauntface.dpad',
+      name: 'inside4ndroid.dpad',
       sourcemap: true
     },
     plugins: [
