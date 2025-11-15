@@ -1,158 +1,407 @@
-# D-Pad Navigation Library
+# 🎮 D-Pad Navigation Library
+
+<div align="center">
 
 [![Build Status](https://github.com/Inside4ndroid/js-dpad-navigation/actions/workflows/build.yml/badge.svg)](https://github.com/Inside4ndroid/js-dpad-navigation/actions/workflows/build.yml)
 [![npm version](https://img.shields.io/npm/v/@inside4ndroid/js-dpad-nav.svg)](https://www.npmjs.com/package/@inside4ndroid/js-dpad-nav)
+[![npm downloads](https://img.shields.io/npm/dm/@inside4ndroid/js-dpad-nav.svg)](https://www.npmjs.com/package/@inside4ndroid/js-dpad-nav)
 [![License](https://img.shields.io/npm/l/@inside4ndroid/js-dpad-nav.svg)](https://github.com/Inside4ndroid/js-dpad-navigation/blob/master/LICENSE)
+[![TypeScript](https://img.shields.io/badge/TypeScript-Ready-blue.svg)](https://www.typescriptlang.org/)
 
-![alt text](http://i.imgur.com/1LcHG7j.png "D-Pad Navigation Library Demo Image")
+**A lightweight, zero-dependency TypeScript library for adding D-Pad/gamepad navigation to web applications**
 
-This library makes it quick and easy to support D-Pad Navigation in a web app.
+[Installation](#-installation) • [Quick Start](#-quick-start) • [Documentation](#-documentation) • [Examples](#-examples) • [API](#-api-reference)
 
-## Details
+![D-Pad Navigation Demo](http://i.imgur.com/1LcHG7j.png)
 
-This library is broken up into two parts, the **library** itself and some **helpers**.
+</div>
 
-The **library** contains the logic for the dpad navigation and debugging.
+---
 
-The **helpers** are lightweight wrappers that can be dropped into a web page and provide
-the common logic / make it east to add d-pad navigation with little to no Javascript
-needing to be written. Add these JavaScript files to your HTML page, and away you go.
+## ✨ Features
 
-The helpers are the easiest way to try out this library, but may not be appropriate if:
+- 🎯 **Zero Dependencies** - Lightweight and fast
+- 📦 **TypeScript Support** - Full type definitions included
+- 🎮 **Easy Integration** - Drop-in solution for D-Pad navigation
+- 🐛 **Built-in Debugger** - Visual debugging tools included
+- 🌐 **Universal** - Works with vanilla JS, React, Vue, and other frameworks
+- 🔧 **Flexible API** - Use as CDN, npm module, or standalone scripts
+- ♿ **Accessible** - Built on top of native focus management
 
-1. You have a build process, and you'd like to make this library a part of it
-1. Your web app is a single-page app, and you need this library to follow it's lifecycle.
+## 📦 Installation
 
-The sections below will cover these options as necessary.
+### Via npm (Recommended)
 
-## Usage
+```bash
+npm install @inside4ndroid/js-dpad-nav
+```
 
-To support D-Pad navigation with this library, you need to do the following:
-
-  - Add a `tabindex` and `class="dpad-focusable"` for any element you want to be focusable
-    via the d-pad.
-    For Example:
+### Via CDN
 
 ```html
-<div class="dpad-focusable" tabindex="0">Example</div>
+<!-- Helper scripts (easiest way to get started) -->
+<script src="https://unpkg.com/@inside4ndroid/js-dpad-nav@latest/build/helper/dpad.js" async defer></script>
+<script src="https://unpkg.com/@inside4ndroid/js-dpad-nav@latest/build/helper/dpad-debugger.js" async defer></script>
 ```
 
-  - Apply styling in your css for the focus pseudo class.
-```css  
-.grid-item:focus {
-        outline: none;
-        background-color: rgb(149, 165, 166);
-} 
-```
+## 🚀 Quick Start
 
-With this alone, you should be able to use the "tab" key to test the styles
-and navigation of your site without this library.
+### 1. Mark Your Focusable Elements
 
-With this, you're ready to add the D-Pad navigation library.
-
-## Using the Helpers
-
-With the HTML setup, you can use the helper library by adding the following to your
-HTML pages:
+Add the `dpad-focusable` class and `tabindex` to any element you want to be navigable:
 
 ```html
-<script src="https://unpkg.com/@inside4ndroid/js-dpad-nav@1.0.0/build/helper/helper/dpad.js" async defer></script>
-<script src="https://unpkg.com/@inside4ndroid/js-dpad-nav@1.0.0/build/helper/helper/dpad-debugger.js" async defer></script>
+<div class="dpad-focusable" tabindex="0">Menu Item 1</div>
+<div class="dpad-focusable" tabindex="0">Menu Item 2</div>
+<div class="dpad-focusable" tabindex="0">Menu Item 3</div>
 ```
 
-These scripts will add listeners to apply the dpad library to your pages and the `dpad-debugger.js` will
-give your debug UI so you can see what the navigation will be and remove it once everything is working
-as you'd expect.
+### 2. Add Focus Styles
 
-You can interact with the library via `window.dpad` and `window.dpaddebug` which are instances of
-a `DpadController` and `DebugController`, which are discussing in the "Library API" section below.
+Style your elements when they receive focus:
 
-### Using the helpers via NPM
-
-If you want to use the helper files but prefer to self-host the files, you can get them from npm via:
-
-```shell
-npm install @inside4ndroid/js-dpad-nav --save-dev
-cp ./node_modules/@inside4ndroid/js-dpad-nav/build/helper/*.js ./src/third_party/js-dpad-nav/
+```css
+.dpad-focusable:focus {
+  outline: none;
+  background-color: #3498db;
+  transform: scale(1.05);
+  transition: all 0.2s ease;
+}
 ```
 
-## Using the library
+### 3. Initialize the Library
 
-If you want to use the library directly and avoid the helpers, you can take one of the following options:
+#### Using Helpers (Automatic Setup)
 
-### Using the library via CDN
-
-Use a CDN hosted copy of the library:
+The easiest way - just include the helper scripts and everything works automatically:
 
 ```html
-<script src="https://unpkg.com/@inside4ndroid/js-dpad-nav@1.0.0/build/browser/dpad-controller.js" async defer></script>
-<script src="https://unpkg.com/@inside4ndroid/js-dpad-nav@1.0.0/build/browser/debug-controller.js" async defer></script>
+<script src="https://unpkg.com/@inside4ndroid/js-dpad-nav@latest/build/helper/dpad.js" async defer></script>
+<script src="https://unpkg.com/@inside4ndroid/js-dpad-nav@latest/build/helper/dpad-debugger.js" async defer></script>
 ```
 
-The libraries will be accesible via `window.inside4ndroid.dpad.DpadController` and `window.inside4ndroid.dpad.DebugController`;
-
-### Using the library via NPM
-
-If you use NPM to manage your JavaScript dependencies, you can install and use this
-library as an npm module:
-
-```shell
-npm install @inside4ndroid/js-dpad-nav --save-dev
+Access the controllers via:
+```javascript
+window.dpad          // DpadController instance
+window.dpaddebug     // DebugController instance
 ```
 
-Then include the scripts like so:
+#### Using as an npm Module
 
 ```javascript
-const {DpadController, DebugController} = require('@inside4ndroid/js-dpad-nav');
-```
+import { DpadController, DebugController } from '@inside4ndroid/js-dpad-nav';
 
-## Library API
-
-Typical usage of the library API would look like so:
-
-```javascript
-// Create a new dpad controller
+// Initialize the controller
 const dpad = new DpadController();
-// Call update to get the focusable items in the DOM
 dpad.update();
 
-// To enable debugging, create debug controller
+// Enable debugging (optional)
 const debug = new DebugController(dpad);
-// Turn on debugging
 debug.setDebugMode(true);
 ```
 
-If your DOM changes, you can call `<DpadController>.update()` and 
-`<DebugController>.updateDisplay()` to force the controllers to handle
-the changes.
+#### Using CommonJS
 
-## Events
+```javascript
+const { DpadController, DebugController } = require('@inside4ndroid/js-dpad-nav');
 
-This library will trigger normal focus and click events for your focusable
-elemens, so adding event listeners can be useful if you want to listen for
-events:
-
-```js
-element.addEventListener('focus', function(e) {
-        console.log('Element Focused');
-});
-
-element.addEventListener('click', function() {
-        console.log('Element Clicked');
-});
+const dpad = new DpadController();
+dpad.update();
 ```
 
-## Tabindex and Browser Focus
+That's it! Your app now supports D-Pad navigation using arrow keys. 🎉
 
-With the tabindex property, you can determine the order of which view is focused when the user presses the tab key. This library ignores the tabindex order but requires it to ensure the browser allows an element to gain focus.
+## 📖 Documentation
 
-## Debugging
+### Key Concepts
 
-If you add the debug library to your web page you can toggle debug mode like so:
+**Focusable Elements**: Any DOM element with the class `dpad-focusable` and a `tabindex` attribute can be navigated via D-Pad.
 
-```js
+**Navigation**: The library automatically calculates the nearest focusable element in each direction (up, down, left, right) based on geometric positioning.
+
+**Dynamic Content**: Call `dpad.update()` whenever your DOM changes to recalculate navigation paths.
+
+## 🎯 Examples
+
+### Basic Grid Navigation
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 150px);
+      gap: 20px;
+    }
+    .grid-item {
+      padding: 40px;
+      background: #ecf0f1;
+      text-align: center;
+      cursor: pointer;
+    }
+    .grid-item:focus {
+      outline: none;
+      background: #3498db;
+      color: white;
+      transform: scale(1.1);
+      transition: all 0.2s ease;
+    }
+  </style>
+</head>
+<body>
+  <div class="grid">
+    <div class="grid-item dpad-focusable" tabindex="0">Item 1</div>
+    <div class="grid-item dpad-focusable" tabindex="0">Item 2</div>
+    <div class="grid-item dpad-focusable" tabindex="0">Item 3</div>
+    <div class="grid-item dpad-focusable" tabindex="0">Item 4</div>
+    <div class="grid-item dpad-focusable" tabindex="0">Item 5</div>
+    <div class="grid-item dpad-focusable" tabindex="0">Item 6</div>
+  </div>
+
+  <script src="https://unpkg.com/@inside4ndroid/js-dpad-nav@latest/build/helper/dpad.js"></script>
+  <script src="https://unpkg.com/@inside4ndroid/js-dpad-nav@latest/build/helper/dpad-debugger.js"></script>
+</body>
+</html>
+```
+
+### With React
+
+```jsx
+import { useEffect } from 'react';
+import { DpadController } from '@inside4ndroid/js-dpad-nav';
+
+function App() {
+  useEffect(() => {
+    const dpad = new DpadController();
+    dpad.update();
+
+    // Update when component re-renders
+    return () => dpad.disable();
+  }, []);
+
+  return (
+    <div className="menu">
+      <button className="dpad-focusable" tabIndex={0}>Home</button>
+      <button className="dpad-focusable" tabIndex={0}>About</button>
+      <button className="dpad-focusable" tabIndex={0}>Contact</button>
+    </div>
+  );
+}
+```
+
+### Dynamic Content
+
+```javascript
+const dpad = new DpadController();
+dpad.update();
+
+// When adding new elements dynamically
+function addMenuItem(text) {
+  const item = document.createElement('div');
+  item.className = 'dpad-focusable menu-item';
+  item.tabIndex = 0;
+  item.textContent = text;
+  document.querySelector('.menu').appendChild(item);
+  
+  // Update navigation paths
+  dpad.update();
+}
+```
+
+## 🔧 Advanced Usage
+
+### Self-Hosting Helper Files
+
+If you prefer to host the files yourself:
+
+```bash
+npm install @inside4ndroid/js-dpad-nav
+cp -r ./node_modules/@inside4ndroid/js-dpad-nav/build/helper ./public/js/
+```
+
+```html
+<script src="/js/helper/dpad.js"></script>
+<script src="/js/helper/dpad-debugger.js"></script>
+```
+
+### Using Browser Bundles via CDN
+
+For direct access to the classes:
+
+```html
+<script src="https://unpkg.com/@inside4ndroid/js-dpad-nav@latest/build/browser/index.js"></script>
+<script>
+  const dpad = new gauntface.dpad.DpadController();
+  dpad.update();
+</script>
+```
+
+## 🎮 API Reference
+
+### DpadController
+
+Main controller for D-Pad navigation.
+
+#### Constructor
+
+```typescript
+new DpadController()
+```
+
+#### Methods
+
+| Method | Description | Returns |
+|--------|-------------|---------|
+| `enable()` | Enables D-Pad navigation (enabled by default) | `void` |
+| `disable()` | Disables D-Pad navigation | `void` |
+| `update()` | Scans DOM for focusable elements and calculates navigation paths | `void` |
+| `findFocusableItems()` | Finds all elements with `.dpad-focusable` class | `void` |
+| `setCurrentFocusItem(index: number)` | Programmatically focus an item by index | `void` |
+| `getFocusableItems()` | Returns array of all focusable items | `FocusableItem[]` |
+| `getFocusableItem(index: number)` | Get a specific focusable item | `FocusableItem \| null` |
+| `moveFocus(direction: Point)` | Move focus in a direction | `void` |
+
+#### Keyboard Controls
+
+| Key | Action |
+|-----|--------|
+| ⬆️ Arrow Up | Move focus up |
+| ⬇️ Arrow Down | Move focus down |
+| ⬅️ Arrow Left | Move focus left |
+| ➡️ Arrow Right | Move focus right |
+| ⏎ Enter / Space | Trigger click on focused element |
+
+### DebugController
+
+Visual debugging tool to see navigation paths.
+
+#### Constructor
+
+```typescript
+new DebugController(dpad: DpadController)
+```
+
+#### Methods
+
+| Method | Description | Returns |
+|--------|-------------|---------|
+| `setDebugMode(enabled: boolean)` | Enable/disable debug mode | `void` |
+| `toggleDebugMode()` | Toggle debug mode on/off | `void` |
+| `updateDisplay()` | Refresh debug visualization | `void` |
+
+#### Debug Mode
+
+When enabled, colored lines show the navigation path from each element:
+
+![Debug Mode](http://i.imgur.com/7PT6tAa.png)
+
+```javascript
+// Toggle debug mode
 window.dpaddebug.toggleDebugMode();
+
+// Or programmatically
+const debug = new DebugController(dpad);
+debug.setDebugMode(true);
 ```
 
-![alt text](http://i.imgur.com/7PT6tAa.png "D-Pad Navigation Library Demo Debug Mode Image")
+## 📡 Events
+
+The library triggers standard DOM events, making it easy to integrate with existing code:
+
+```javascript
+// Listen for focus events
+element.addEventListener('focus', (e) => {
+  console.log('Element focused:', e.target);
+});
+
+// Listen for click events (triggered by Enter/Space)
+element.addEventListener('click', (e) => {
+  console.log('Element clicked:', e.target);
+});
+```
+
+## 🎨 Styling Tips
+
+### Modern Focus Styles
+
+```css
+.dpad-focusable {
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.dpad-focusable:focus {
+  outline: none;
+  transform: scale(1.05);
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.5);
+  z-index: 10;
+}
+```
+
+### Glow Effect
+
+```css
+.dpad-focusable:focus {
+  outline: none;
+  box-shadow: 0 0 20px rgba(52, 152, 219, 0.8);
+  filter: brightness(1.2);
+}
+```
+
+### Border Highlight
+
+```css
+.dpad-focusable:focus {
+  outline: none;
+  border: 3px solid #3498db;
+  border-radius: 8px;
+}
+```
+
+## 💡 Tips & Best Practices
+
+- ✅ **Always include `tabindex`** - Required for elements to receive focus
+- ✅ **Use `tabindex="0"`** - Makes elements focusable in natural tab order
+- ✅ **Call `update()` after DOM changes** - Ensures navigation paths are current
+- ✅ **Test with keyboard first** - Use Tab key before adding D-Pad library
+- ✅ **Style `:focus` state** - Visual feedback is crucial for navigation
+- ⚠️ **Avoid `tabindex="-1"`** - Elements won't be focusable by D-Pad
+- ⚠️ **Hidden elements** - Elements with `display: none` or `visibility: hidden` are skipped
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## 📝 License
+
+This project is licensed under the Apache-2.0 License - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgments
+
+- Original concept and implementation by [gauntface](https://github.com/gauntface)
+- Modernized and maintained by [Inside4ndroid](https://github.com/Inside4ndroid)
+
+## 📞 Support
+
+- 📫 [Report Issues](https://github.com/Inside4ndroid/js-dpad-navigation/issues)
+- 📦 [npm Package](https://www.npmjs.com/package/@inside4ndroid/js-dpad-nav)
+- 💬 [Discussions](https://github.com/Inside4ndroid/js-dpad-navigation/discussions)
+
+---
+
+<div align="center">
+
+Made with ❤️ for web developers building TV apps, kiosks, and accessible interfaces
+
+**[⬆ back to top](#-d-pad-navigation-library)**
+
+</div>
 
