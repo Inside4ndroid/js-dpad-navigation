@@ -1,0 +1,40 @@
+# Source files (build output is in package.json "files")
+src/
+
+# Development files
+gulpfile.js
+tsconfig.json
+tsconfig.node.json
+rollup.config.js
+renovate.json
+
+# Tests
+test/
+
+# Development dependencies
+node_modules/
+
+# Git
+.git/
+.gitignore
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# Build artifacts we don't need to publish
+*.tgz
+
+# Documentation (keep README.md and LICENSE)
+docs/
